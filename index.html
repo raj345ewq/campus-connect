@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Campus Connect Workshop Hub — register teams, build projects, and showcase your work.">
+  <title>Campus Connect | Workshop Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="#" class="brand">Campus<span>Connect</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#topics">Topics</a>
+        <a href="#register">Register</a>
+        <a href="#projects">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-content">
+        <p class="eyebrow">CHRIST University · Workshop 2026</p>
+        <h1>Build something<br><span>that matters.</span></h1>
+        <p class="hero-description">
+          Bring your ideas to life. Propose a unique topic, collaborate
+          with your team, and showcase your finished project.
+        </p>
+        <a href="#register" class="button button-primary">
+          Register your team →
+        </a>
+
+        <div class="hero-stats">
+          <div>
+            <strong>Open</strong>
+            <span>Topic ideas</span>
+          </div>
+          <div>
+            <strong>02–10</strong>
+            <span>Members per team</span>
+          </div>
+          <div>
+            <strong>Build</strong>
+            <span>Something useful</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOPIC EXPLORER -->
+    <section class="section" id="topics">
+      <div class="container">
+        <p class="eyebrow">Meet the participants</p>
+<h2>Registered teams.</h2>
+<p class="section-description">
+  Explore the teams registered for the workshop, their project ideas,
+  and the members working together.
+</p>
+
+        <div class="topic-grid" id="topic-grid">
+          <p>Loading registered topics...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM REGISTRATION -->
+    <section class="section registration-section" id="register">
+      <div class="container registration-layout">
+        <div class="registration-intro">
+          <p class="eyebrow">Your project starts here</p>
+          <h2>Register your team.</h2>
+          <p>
+            Choose your own topic and tell us what your team plans to build.
+          </p>
+
+          <div class="info-card">
+            <strong>Registration guidelines</strong>
+            <ul>
+              <li>Teams must have 2–10 members.</li>
+              <li>Exactly one member must be the Team Lead.</li>
+              <li>Topic ideas must be distinct from existing registrations.</li>
+              <li>Save your registration ID after registering.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="team-form">
+            <div class="form-field">
+              <label for="team-name">Team name</label>
+              <input
+                id="team-name"
+                name="teamName"
+                type="text"
+                placeholder="e.g. Code Catalysts"
+                minlength="2"
+                maxlength="50"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="project-title">Project title</label>
+              <input
+                id="project-title"
+                name="projectTitle"
+                type="text"
+                placeholder="e.g. Smart Campus Guide"
+                minlength="2"
+                maxlength="80"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="topic-title">Your proposed topic</label>
+              <input
+                id="topic-title"
+                name="topicTitle"
+                type="text"
+                placeholder="e.g. AI-powered campus accessibility"
+                minlength="3"
+                maxlength="100"
+                required
+              >
+              <p class="helper-text">
+                Enter your own idea. Existing or very similar topics will be rejected.
+              </p>
+            </div>
+
+            <div class="members-heading">
+              <div>
+                <h3>Team members</h3>
+                <p class="helper-text">Include yourself and your teammates.</p>
+              </div>
+              <button
+                type="button"
+                class="button button-secondary"
+                id="add-member"
+              >
+                + Add member
+              </button>
+            </div>
+
+            <div id="members-list"></div>
+
+            <button
+              class="button button-primary submit-button"
+              id="submit-button"
+              type="submit"
+            >
+              Register team
+            </button>
+
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+          </form>
+
+          <div id="registration-preview" class="registration-preview" hidden>
+            <h3>Team registration</h3>
+            <p class="helper-text">
+              Keep your registration ID. You will need it to submit your final project.
+            </p>
+            <div id="registration-details"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL PROJECT SUBMISSION -->
+    <section class="section" id="submit-project">
+      <div class="container registration-layout">
+        <div class="registration-intro">
+          <p class="eyebrow">Ready to showcase your work?</p>
+          <h2>Submit your final project.</h2>
+          <p>
+            Once your website is live, submit its URL, a short description,
+            and a screenshot for review.
+          </p>
+
+          <div class="info-card">
+            <strong>Before submitting</strong>
+            <ul>
+              <li>Deploy your website so it can be opened online.</li>
+              <li>Prepare a description of 30–2000 characters.</li>
+              <li>Use a publicly accessible screenshot URL.</li>
+              <li>Projects appear in the gallery only after approval.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="project-form">
+            <div class="form-field">
+              <label for="registration-id">Team registration ID</label>
+              <input
+                id="registration-id"
+                name="registrationId"
+                type="text"
+                placeholder="Paste your saved registration ID"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="website-url">Live website URL</label>
+              <input
+                id="website-url"
+                name="websiteUrl"
+                type="url"
+                placeholder="https://your-project.example"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="project-description">Project description</label>
+              <textarea
+                id="project-description"
+                name="projectDescription"
+                rows="5"
+                minlength="30"
+                maxlength="2000"
+                placeholder="Describe the problem, your solution, and its main features..."
+                required
+              ></textarea>
+            </div>
+
+
+
+            <button
+              type="submit"
+              id="project-submit-button"
+              class="button button-primary submit-button"
+            >
+              Submit final project
+            </button>
+
+            <p id="project-message" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROVED PROJECT GALLERY -->
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="eyebrow">Made by students</p>
+        <h2>Project showcase.</h2>
+        <p class="section-description">
+          Explore projects that have been reviewed and approved.
+        </p>
+
+        <div id="project-gallery" class="topic-grid">
+          <p>Loading approved projects...</p>
+        </div>
+
+        <p id="gallery-message" class="form-message" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Campus Connect Workshop Hub · Built with curiosity and code.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
