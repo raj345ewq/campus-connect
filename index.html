@@ -10,30 +10,47 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-content">
+<header class="site-header">
+  <div class="container header-content">
+    <div class="header-left">
+      <!-- Save the top header logo strip from the poster as "christ-logo.png" -->
+      <img 
+        src="https://lavasa.christuniversity.in/images/logo.png" 
+        alt="CHRIST (Deemed to be University) Pune Lavasa Campus" 
+        class="university-header-logo"
+      >
+      <div class="brand-divider"></div>
       <a href="#" class="brand">Campus<span>Connect</span></a>
-      <nav aria-label="Main navigation">
-        <a href="#topics">Topics</a>
-        <a href="#register">Register</a>
-        <a href="#projects">Projects</a>
-      </nav>
     </div>
-  </header>
 
+    <nav aria-label="Main navigation">
+      <a href="#topics">Topics</a>
+      <a href="#register">Register</a>
+      <a href="#projects">Projects</a>
+      <a href="#event-details" class="button button-secondary nav-cta">Workshop Info</a>
+    </nav>
+  </div>
+</header>
   <main>
-    <!-- HERO -->
     <section class="hero">
-      <div class="container hero-content">
-        <p class="eyebrow">CHRIST University · Workshop 2026</p>
-        <h1>Build something<br><span>that matters.</span></h1>
-        <p class="hero-description">
-          Bring your ideas to life. Propose a unique topic, collaborate
-          with your team, and showcase your finished project.
-        </p>
-        <a href="#register" class="button button-primary">
-          Register your team →
-        </a>
+  <div class="container hero-layout">
+    <!-- Left Hero Info -->
+    <div class="hero-content">
+      <div class="eyebrow-badge">
+        <span>CHRIST University · Pune Lavasa Campus</span>
+      </div>
+      
+      <h1>Next-Gen Web Development:<br><span>Tools & Technologies</span></h1>
+      
+      <p class="hero-description">
+        Organized by the Department of Statistics & Data Science and Department of Computer Science.
+        Propose your idea, collaborate with your team, and build projects that make an impact.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#register" class="button button-primary">Register your team →</a>
+        <a href="#topics" class="button button-secondary">Explore topics</a>
+      </div>
 
         <div class="hero-stats">
           <div>
@@ -41,16 +58,56 @@
             <span>Topic ideas</span>
           </div>
           <div>
-            <strong>02–10</strong>
-            <span>Members per team</span>
-          </div>
-          <div>
             <strong>Build</strong>
             <span>Something useful</span>
           </div>
         </div>
+    </div>
+
+    <!-- Right Event Details Card -->
+    <div class="event-info-card" id="event-details">
+      <div class="event-card-header">
+        <span class="event-tag">Offline Workshop</span>
+        <h3>Workshop Brief</h3>
       </div>
-    </section>
+
+      <div class="event-detail-list">
+        <div class="detail-item">
+          <div class="detail-icon">📅</div>
+          <div>
+            <strong>Date & Time</strong>
+            <p>October 31, 2026 · 9:00 AM – 1:30 PM</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon">📍</div>
+          <div>
+            <strong>Venue</strong>
+            <p>Smart Room, Central Block, Lavasa Campus</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon">👥</div>
+          <div>
+            <strong>Eligible Batches</strong>
+            <p>1st & 3rd BSc CS DS · 3rd & 5th BCA</p>
+          </div>
+        </div>
+
+        <div class="speaker-pill">
+          <!-- Crop speaker photo or save it as speaker.png -->
+          <img src="speaker.png" alt="Rajdeep Deb" class="speaker-avatar">
+          <div class="speaker-text">
+            <strong>Rajdeep Deb</strong>
+            <p>Junior Product Manager, Jio Cloud</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- TOPIC EXPLORER -->
     <section class="section" id="topics">
