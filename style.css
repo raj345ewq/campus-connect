@@ -51,10 +51,14 @@ a {
 }
 
 .site-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 230, 240, 0.8);
 }
-
 .header-content {
   min-height: 76px;
   display: flex;
@@ -124,11 +128,17 @@ a {
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: #e0e7ff;
   color: var(--primary);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1.7px;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
 }
 
 .hero h1,
@@ -163,8 +173,12 @@ a {
 }
 
 .hero-stats div {
-  display: grid;
-  gap: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 230, 240, 0.8);
+  padding: 14px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(81, 70, 229, 0.04);
 }
 
 .hero-stats strong {
@@ -304,13 +318,6 @@ textarea {
   line-height: 1.55;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px #5146e51a;
-}
-
 
 input:focus,
 select:focus {
@@ -345,6 +352,10 @@ select:focus {
   margin-bottom: 14px;
   padding-bottom: 14px;
   border-bottom: 1px solid var(--border);
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
 
 .member-field {
@@ -361,6 +372,12 @@ select:focus {
   border: 1px solid #ffd4d0;
   border-radius: 9px;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.remove-member:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
 }
 
 .submit-button {
@@ -751,6 +768,289 @@ select:focus {
 }
 
 /* ========================================
+   PROJECT SHOWCASE (POLISHED & UNIFIED)
+======================================== */
+
+#projects .topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+  margin-top: 36px;
+}
+
+/* Project Card Container */
+#projects .project-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+#projects .project-card:hover {
+  transform: translateY(-5px);
+  border-color: #cbd5e1;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
+}
+
+/* --- Live Website Desktop Preview --- */
+/* 1. Make the container background white instead of grey */
+#projects .project-preview {
+  position: relative;
+  width: 100%;
+  height: 200px;            /* Set exact container height */
+  margin: 0;
+  overflow: hidden;
+  background: #ffffff;      /* Changed from #f1f5f9 to white */
+  border-bottom: 1px solid #e2e8f0;
+  flex: 0 0 auto;
+}
+
+/* 2. Increase the iframe's virtual height so it never cuts short */
+#projects .project-preview-frame {
+  position: absolute;
+  top: 32px;                /* Sits right below the browser bar */
+  left: 0;
+  display: block;
+  width: 1280px;
+  height: 1000px;           /* Increased from 650px/720px so content fills past the bottom */
+  border: 0;
+  background: #ffffff;
+  transform: scale(0.28);   /* Adjust scale smoothly */
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+#projects .preview-browser-bar {
+  position: relative;
+  z-index: 2;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+/* Realistic colored browser dots */
+#projects .preview-browser-bar span {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+}
+#projects .preview-browser-bar span:nth-child(1) { background: #ff5f56; }
+#projects .preview-browser-bar span:nth-child(2) { background: #ffbd2e; }
+#projects .preview-browser-bar span:nth-child(3) { background: #27c93f; }
+
+#projects .preview-browser-bar p {
+  margin: 0 0 0 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Fallback static screenshot if used instead of iframe */
+#projects .project-card > img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top center;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* --- Internal Card Spacing & Structure --- */
+#projects .project-card > :not(img):not(.project-preview) {
+  margin-left: 22px;
+  margin-right: 22px;
+}
+
+/* Fix for the huge "Approved Project" banner into a refined pill tag */
+#projects .project-card .eyebrow,
+#projects .project-card [class*="approved"],
+#projects .project-card [class*="status"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+#projects .project-card .eyebrow::before,
+#projects .project-card [class*="approved"]::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* Project Title */
+#projects .project-card h3 {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  color: #0f172a;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* Card Body & Metadata (Team, Topic, Description) */
+#projects .project-card p {
+  margin: 0 0 10px;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#projects .project-card p strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Project Description - clamp to 3 lines for visual balance */
+#projects .project-card p:not(:has(strong)) {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.88rem;
+}
+
+/* --- Action Button (Converts plain text link to clean pill button) --- */
+#projects .project-card a,
+#projects .project-visit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 22px;
+  padding: 10px 16px;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  overflow-wrap: anywhere;
+}
+
+#projects .project-card a:hover,
+#projects .project-visit-link:hover {
+  background: var(--primary, #5146e5);
+  color: #ffffff;
+  border-color: var(--primary, #5146e5);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* Unavailable preview fallback */
+#projects .project-preview-unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 32px);
+  padding: 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.86rem;
+}
+
+/* --- Responsive Layouts --- */
+@media (min-width: 951px) {
+  #projects .project-preview-frame {
+    transform: scale(0.27);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 950px) {
+  #projects .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  #projects .project-preview-frame {
+    transform: scale(0.35);
+  }
+}
+
+@media (max-width: 600px) {
+  #projects .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  #projects .project-card {
+    border-radius: 16px;
+  }
+
+  #projects .project-preview {
+    height: 185px;
+  }
+
+  #projects .project-preview-frame {
+    transform: scale(0.28);
+  }
+
+  #projects .project-card > :not(img):not(.project-preview) {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  #projects .project-card h3 {
+    font-size: 1.15rem;
+  }
+
+  #projects .project-card a,
+  #projects .project-visit-link {
+    margin-bottom: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .project-card,
+  #projects .project-card a {
+    transition: none;
+  }
+
+  #projects .project-card:hover,
+  #projects .project-card a:hover {
+    transform: none;
+  }
+}
+/* ========================================
    PROJECT SHOWCASE
 ======================================== */
 
@@ -1053,3 +1353,294 @@ select:focus {
   }
 }
 
+
+nav a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+nav a:hover {
+  color: var(--primary);
+  background: #eeedff;
+}
+
+.skeleton-card {
+  min-height: 200px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+/* =========================================================
+   PROJECT SHOWCASE PREVIEW (FINAL UNIFIED FIX)
+========================================================= */
+
+#projects .project-card .project-preview {
+  position: relative !important;
+  width: 100% !important;
+  height: 260px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-sizing: border-box !important;
+}
+
+#projects .preview-browser-bar {
+  position: relative !important;
+  z-index: 10 !important;
+  height: 32px !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 0 12px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-sizing: border-box !important;
+}
+
+#projects .preview-browser-bar span {
+  width: 8px !important;
+  height: 8px !important;
+  flex: 0 0 8px !important;
+  border-radius: 50% !important;
+}
+#projects .preview-browser-bar span:nth-child(1) { background: #ff5f56 !important; }
+#projects .preview-browser-bar span:nth-child(2) { background: #ffbd2e !important; }
+#projects .preview-browser-bar span:nth-child(3) { background: #27c93f !important; }
+
+#projects .preview-browser-bar p {
+  margin: 0 0 0 8px !important;
+  font-size: 11px !important;
+  color: #64748b !important;
+}
+
+/* 
+   Calculate exact scale based on card width:
+   If card is ~340px wide, 340 / 1280 = ~0.265
+*/
+#projects .project-preview iframe,
+#projects .project-preview-frame {
+  position: absolute !important;
+  top: 32px !important;
+  left: 0 !important;
+  width: 1280px !important;
+  height: 900px !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: #ffffff !important;
+  transform: scale(0.26) !important;
+  transform-origin: top left !important;
+  pointer-events: none !important;
+}
+
+/* Remove any conflicting older responsive transforms */
+@media (max-width: 950px) {
+  #projects .project-preview iframe,
+  #projects .project-preview-frame {
+    transform: scale(0.32) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #projects .project-card .project-preview {
+    height: 230px !important;
+  }
+  #projects .project-preview iframe,
+  #projects .project-preview-frame {
+    transform: scale(0.27) !important;
+  }
+}
+/* =========================================================
+   UNIVERSITY BRANDING & EVENT HERO LAYOUT
+========================================================= */
+
+/* Header Branding */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.university-header-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+.nav-cta {
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+/* Two-column Hero Layout */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: #e0e7ff;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Event Info Card (Right Column) */
+.event-info-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 230, 240, 0.9);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.event-card-header h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+}
+
+.event-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.event-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detail-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.detail-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #1e293b;
+}
+
+.detail-item p {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Speaker Pill */
+.speaker-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+}
+
+.speaker-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.speaker-text strong {
+  display: block;
+  font-size: 0.92rem;
+  color: #0f172a;
+}
+
+.speaker-text p {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* Responsive adjustment for Mobile & Tablet */
+@media (max-width: 900px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .header-left .brand-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .university-header-logo {
+    height: 30px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+  }
+}
